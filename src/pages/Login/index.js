@@ -1,11 +1,14 @@
+import { useContext } from 'react';
 import { Button, Text, View, StyleSheet, TextInput } from 'react-native'
+import AuthContext from '../../contexts/AuthContext';
 
 export default function LoginScreen(props) {
     
-    function navegarHome() {
-        props.navigation.navigate('Home', { id: '155' })
+    const { setIsLogged } = useContext(AuthContext);
+    function login() {
+        // ENVIAR PARA API E VER SE OS DADOS ESTAO CORRETOS.
+        setIsLogged(true);
     }
-
     return (
         <>
             <View style={styles.container}>
@@ -19,7 +22,7 @@ export default function LoginScreen(props) {
                     <Button 
                         title='Acessar'
                         color="pink"
-                        onPress={() => navegarHome()}
+                        onPress={() => login()}
                     /> 
                 </View>
             </View>
