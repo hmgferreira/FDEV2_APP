@@ -1,14 +1,20 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Text, View, StyleSheet, TextInput } from 'react-native'
 import AuthContext from '../../contexts/AuthContext';
 import Util from '../../config/Util';
-import axios from 'axios';
+
 
 export default function LoginScreen(props) {
     
     const { setIsLogged } = useContext(AuthContext);
-    function login() {
-        
+
+    const[login, setLogin] = useState('');
+    const[senha, setSenha] = useState('');
+
+    function acessar() {
+
+        alert(login);
+        alert(senha);
         // ENVIAR PARA API E VER SE OS DADOS ESTAO CORRETOS.
         Util.setToken('d32dodo32do3di32di2idp23d23d23');
         setIsLogged(true);
@@ -18,15 +24,14 @@ export default function LoginScreen(props) {
             <View style={styles.container}>
                 <View style={styles.caixa}>
                     <Text>Login</Text> 
-                    <TextInput style={styles.input} />
-
+                    <TextInput onChangeText={value => setLogin(value)} style={styles.input} />
                     <Text>Password</Text> 
-                    <TextInput style={styles.input} />
+                    <TextInput secureTextEntry={true} onChangeText={value => setSenha(value)} style={styles.input} />
 
                     <Button 
                         title='Acessar'
                         color="pink"
-                        onPress={() => login()}
+                        onPress={() => acessar()}
                     /> 
                 </View>
             </View>
