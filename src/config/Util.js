@@ -18,6 +18,7 @@ const Util = {
             alert("Erro ao persistir token.");
         }
     },
+    
     removeToken: async function() {
         try {
             const token = await AsyncStorage.removeItem('app@token');

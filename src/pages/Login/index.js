@@ -2,10 +2,13 @@ import { useContext } from 'react';
 import { Button, Text, View, StyleSheet, TextInput } from 'react-native'
 import AuthContext from '../../contexts/AuthContext';
 import Util from '../../config/Util';
+import axios from 'axios';
+
 export default function LoginScreen(props) {
     
     const { setIsLogged } = useContext(AuthContext);
     function login() {
+        
         // ENVIAR PARA API E VER SE OS DADOS ESTAO CORRETOS.
         Util.setToken('d32dodo32do3di32di2idp23d23d23');
         setIsLogged(true);
