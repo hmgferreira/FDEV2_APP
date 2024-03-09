@@ -2,8 +2,7 @@ import { useContext, useState } from 'react';
 import { Button, Text, View, StyleSheet, TextInput } from 'react-native'
 import AuthContext from '../../contexts/AuthContext';
 import Util from '../../config/Util';
-
-
+import Api from '../../config/Api';
 export default function LoginScreen(props) {
     
     const { setIsLogged } = useContext(AuthContext);
@@ -11,14 +10,20 @@ export default function LoginScreen(props) {
     const[login, setLogin] = useState('');
     const[senha, setSenha] = useState('');
 
-    function acessar() {
-
-        alert(login);
-        alert(senha);
-        // ENVIAR PARA API E VER SE OS DADOS ESTAO CORRETOS.
-        Util.setToken('d32dodo32do3di32di2idp23d23d23');
-        setIsLogged(true);
+    async function acessar() {
+        const response = await Api.post('login', {
+            login: login,
+            senha: senha
+        })
+      
+        if(response.data.token) {
+            Util.setToken(response.data.token);
+            setIsLogged(true);
+        } else {
+            alert('Usuário ou senha inválidos');
+        }
     }
+    
     return (
         <>
             <View style={styles.container}>
